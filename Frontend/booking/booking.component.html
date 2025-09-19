@@ -1,0 +1,86 @@
+<div class="booking-page">
+  <div class="booking-form-section">
+    <div class="booking-form-card">
+      <h2>Book a Flight</h2>
+
+      <form (ngSubmit)="submitBooking()" #bookingForm="ngForm">
+        
+        <div class="form-group">
+          <label for="customer">Select Customer:</label>
+          <select
+            id="customer"
+            [(ngModel)]="booking.customerID"
+            name="customer"
+            required
+          >
+            <option *ngFor="let c of customers" [value]="c.customerID">
+              {{ c.name }} 
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="flight">Select Flight:</label>
+          <select
+            id="flight"
+            [(ngModel)]="booking.flightID"
+            name="flight"
+            required
+          >
+            <option *ngFor="let f of flights" [value]="f.flightID">
+              {{ f.flightNumber }} | {{ f.origin }} → {{ f.destination }} |
+              {{ f.travelDate }} | ₹{{ f.price }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Passenger Name:</label>
+          <input
+            type="text"
+            [(ngModel)]="booking.passengerName"
+            name="passengerName"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Passenger Age:</label>
+          <input
+            type="number"
+            [(ngModel)]="booking.passengerAge"
+            name="passengerAge"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Passenger Gender:</label>
+          <select
+            [(ngModel)]="booking.passengerGender"
+            name="passengerGender"
+            required
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>No. of Seats:</label>
+          <input
+            type="number"
+            [(ngModel)]="booking.noOfSeats"
+            name="noOfSeats"
+            [max]="maxSeats"
+            min="1"
+            required
+          />
+        </div>
+
+        <button type="submit">Book Flight</button>
+      </form>
+    </div>
+  </div>
+</div>
